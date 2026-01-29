@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - Ремонт и отделка под ключ</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/services-animations.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">РемонтПро</div>
+            <div class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="portfolio.html">Портфолио</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Страница услуг -->
+    <div class="page">
+        <section style="padding-top: 3rem;">
+            <div class="container">
+                <h2>Наши услуги</h2>
+                <div class="services-container">
+                    <div class="services-list" id="services-list">
+                        <!-- Услуги будут добавлены через JavaScript -->
+                    </div>
+                    
+                    <div class="visualization-panel">
+                        <div class="visualization-container">
+                            <div class="house-3d-wrapper">
+                                <!-- Здесь могут быть SVG анимации визуализации работ -->
+                                 <svg class="service-animation" id="animation-container" viewBox="0 0 400 400">
+                                    <!-- Градиенты для стильного вида -->
+                                    <defs>
+                                        <linearGradient id="wall-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#f5f5f5;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="roof-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="door-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4a5568;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#2d3748;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="window-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#e0f2fe;stop-opacity:0.9" />
+                                            <stop offset="100%" style="stop-color:#bae6fd;stop-opacity:0.9" />
+                                        </linearGradient>
+                                        <linearGradient id="floor-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#deb887;stop-opacity:1" />
+                                            <stop offset="50%" style="stop-color:#d2691e;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#deb887;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.15"/>
+                                        </filter>
+                                        <filter id="glow">
+                                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur"/>
+                                                <feMergeNode in="SourceGraphic"/>
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+                                    
+                                    <!-- Дом - основа -->
+                                    <g id="house-base">
+                                        <!-- Фундамент с градиентом -->
+                                        <rect x="60" y="280" width="280" height="15" fill="url(#wall-gradient)" opacity="0.8" rx="3"/>
+                                        
+                                        <!-- Стены с тенью -->
+                                        <rect x="75" y="150" width="250" height="130" fill="url(#wall-gradient)" 
+                                              stroke="#e2e8f0" stroke-width="2" id="walls-element" 
+                                              filter="url(#shadow)" rx="4"/>
+                                        
+                                        <!-- Крыша с градиентом -->
+                                        <path d="M 200 75 L 70 150 L 75 150 L 200 82 L 325 150 L 330 150 Z" 
+                                              fill="url(#roof-gradient)" 
+                                              filter="url(#shadow)" id="roof-element"/>
+                                        
+                                        <!-- Окна стильные -->
+                                        <g id="windows-group">
+                                            <!-- Левое окно -->
+                                            <rect x="100" y="175" width="55" height="55" fill="url(#window-gradient)" 
+                                                  stroke="#667eea" stroke-width="3" rx="6" class="window-element" 
+                                                  opacity="0.95"/>
+                                            <line x1="127.5" y1="175" x2="127.5" y2="230" stroke="#667eea" 
+                                                  stroke-width="2" opacity="0.6"/>
+                                            <line x1="100" y1="202.5" x2="155" y2="202.5" stroke="#667eea" 
+                                                  stroke-width="2" opacity="0.6"/>
+                                            
+                                            <!-- Правое окно -->
+                                            <rect x="245" y="175" width="55" height="55" fill="url(#window-gradient)" 
+                                                  stroke="#667eea" stroke-width="3" rx="6" class="window-element" 
+                                                  opacity="0.95"/>
+                                            <line x1="272.5" y1="175" x2="272.5" y2="230" stroke="#667eea" 
+                                                  stroke-width="2" opacity="0.6"/>
+                                            <line x1="245" y1="202.5" x2="300" y2="202.5" stroke="#667eea" 
+                                                  stroke-width="2" opacity="0.6"/>
+                                        </g>
+                                        
+                                        <!-- Дверь стильная -->
+                                        <rect x="175" y="215" width="50" height="65" fill="url(#door-gradient)" 
+                                              stroke="#667eea" stroke-width="3" rx="8" class="door-element" 
+                                              filter="url(#shadow)"/>
+                                        <!-- Ручка двери -->
+                                        <circle cx="210" cy="247" r="4" fill="#667eea" opacity="0.9"/>
+                                        <!-- Декоративные линии на двери -->
+                                        <rect x="182" y="225" width="36" height="20" fill="none" 
+                                              stroke="#667eea" stroke-width="1.5" rx="3" opacity="0.4"/>
+                                        <rect x="182" y="250" width="36" height="20" fill="none" 
+                                              stroke="#667eea" stroke-width="1.5" rx="3" opacity="0.4"/>
+                                    </g>
+                                    
+                                    <!-- Анимации для сантехники -->
+                                    <g id="plumbing-animation" class="service-visual" style="display: none;">
+                                        <!-- Основные трубы -->
+                                        <path d="M 85 160 Q 85 200 85 240" stroke="#667eea" stroke-width="8" 
+                                              fill="none" stroke-linecap="round" class="pipe-draw" opacity="0"/>
+                                        <path d="M 315 160 Q 315 200 315 240" stroke="#667eea" stroke-width="8" 
+                                              fill="none" stroke-linecap="round" class="pipe-draw" 
+                                              style="animation-delay: 0.3s" opacity="0"/>
+                                        
+                                        <!-- Капли воды (упрощенная анимация) -->
+                                        <circle cx="85" cy="160" r="5" fill="#667eea" class="water-drop" 
+                                                filter="url(#glow)" opacity="0"/>
+                                        <circle cx="315" cy="160" r="5" fill="#667eea" class="water-drop" 
+                                                filter="url(#glow)" style="animation-delay: 0.5s" opacity="0"/>
+                                    </g>
+                                    
+                                    <!-- Анимации для электрики -->
+                                    <g id="electrical-animation" class="service-visual" style="display: none;">
+                                        <!-- Электрощиток -->
+                                        <rect x="180" y="120" width="40" height="30" fill="#4a5568" 
+                                              stroke="#667eea" stroke-width="2" rx="4" class="electric-box-appear" opacity="0"/>
+                                        <circle cx="190" cy="135" r="3" fill="#FFD700" class="light-blink" opacity="0"/>
+                                        <circle cx="210" cy="135" r="3" fill="#FFD700" class="light-blink" 
+                                                style="animation-delay: 0.2s" opacity="0"/>
+                                        
+                                        <!-- Провода от щитка -->
+                                        <path d="M 200 150 L 200 160 L 127.5 160 L 127.5 240" stroke="#667eea" 
+                                              stroke-width="4" fill="none" stroke-linecap="round" 
+                                              class="wire-draw" opacity="0"/>
+                                        <path d="M 200 150 L 200 160 L 272.5 160 L 272.5 240" stroke="#667eea" 
+                                              stroke-width="4" fill="none" stroke-linecap="round" 
+                                              class="wire-draw" style="animation-delay: 0.3s" opacity="0"/>
+                                        
+                                        <!-- Розетки -->
+                                        <g class="socket-install" style="animation-delay: 0.6s" opacity="0">
+                                            <rect x="110" y="235" width="35" height="30" fill="white" 
+                                                  stroke="#667eea" stroke-width="2" rx="4"/>
+                                            <circle cx="120" cy="247" r="3" fill="#667eea"/>
+                                            <circle cx="135" cy="247" r="3" fill="#667eea"/>
+                                            <rect x="122" y="254" width="11" height="6" fill="#667eea" rx="2"/>
+                                        </g>
+                                        
+                                        <g class="socket-install" style="animation-delay: 0.9s" opacity="0">
+                                            <rect x="255" y="235" width="35" height="30" fill="white" 
+                                                  stroke="#667eea" stroke-width="2" rx="4"/>
+                                            <circle cx="265" cy="247" r="3" fill="#667eea"/>
+                                            <circle cx="280" cy="247" r="3" fill="#667eea"/>
+                                            <rect x="267" y="254" width="11" height="6" fill="#667eea" rx="2"/>
+                                        </g>
+                                        
+                                        <!-- Выключатель у двери -->
+                                        <g class="switch-install" style="animation-delay: 1.2s" opacity="0">
+                                            <rect x="155" y="205" width="20" height="30" fill="white" 
+                                                  stroke="#667eea" stroke-width="2" rx="3"/>
+                                            <rect x="160" y="215" width="10" height="12" fill="#667eea" rx="2" 
+                                                  class="switch-toggle"/>
+                                        </g>
+                                        
+                                        <!-- Искры при подключении -->
+                                        <circle cx="127.5" cy="240" r="4" fill="#FFD700" class="connection-spark" 
+                                                style="animation-delay: 1.5s" filter="url(#glow)" opacity="0"/>
+                                        <circle cx="272.5" cy="240" r="4" fill="#FFD700" class="connection-spark" 
+                                                style="animation-delay: 1.8s" filter="url(#glow)" opacity="0"/>
+                                    </g>
+                                    
+                                    <!-- Анимации для пола -->
+                                    <g id="flooring-animation" class="service-visual" style="display: none;">
+                                        <!-- Подложка/основание -->
+                                        <rect x="85" y="240" width="230" height="35" fill="#e0e0e0" 
+                                              opacity="0.4" class="floor-base" opacity="0"/>
+                                        
+                                        <!-- Планки ламината/паркета (с текстурой) -->
+                                        <g class="floor-plank-group">
+                                            <!-- Первая доска -->
+                                            <rect x="85" y="265" width="230" height="10" fill="#c19a6b" 
+                                                  rx="1" class="floor-plank" style="animation-delay: 0.2s" opacity="0"/>
+                                            <line x1="200" y1="265" x2="200" y2="275" stroke="#a0826d" 
+                                                  stroke-width="1" opacity="0.5"/>
+                                            
+                                            <!-- Вторая доска -->
+                                            <rect x="85" y="254" width="230" height="10" fill="#d4a574" 
+                                                  rx="1" class="floor-plank" style="animation-delay: 0.5s" opacity="0"/>
+                                            <line x1="150" y1="254" x2="150" y2="264" stroke="#b08968" 
+                                                  stroke-width="1" opacity="0.5"/>
+                                            <line x1="250" y1="254" x2="250" y2="264" stroke="#b08968" 
+                                                  stroke-width="1" opacity="0.5"/>
+                                            
+                                            <!-- Третья доска -->
+                                            <rect x="85" y="243" width="230" height="10" fill="#c19a6b" 
+                                                  rx="1" class="floor-plank" style="animation-delay: 0.8s" opacity="0"/>
+                                            <line x1="180" y1="243" x2="180" y2="253" stroke="#a0826d" 
+                                                  stroke-width="1" opacity="0.5"/>
+                                            <line x1="280" y1="243" x2="280" y2="253" stroke="#a0826d" 
+                                                  stroke-width="1" opacity="0.5"/>
+                                        </g>
+                                        
+                                        <!-- Инструменты для укладки -->
+                                        <g class="floor-tools" style="animation-delay: 1.1s" opacity="0">
+                                            <!-- Молоток -->
+                                            <rect x="320" y="248" width="12" height="20" fill="#8B4513" rx="2"/>
+                                            <path d="M 320 250 L 310 245 L 310 253 Z" fill="#C0C0C0"/>
+                                            
+                                            <!-- Подбивочный брусок -->
+                                            <rect x="100" y="265" width="8" height="25" fill="#DEB887" rx="1" 
+                                                  class="tool-tap"/>
+                                        </g>
+                                        
+                                        <!-- Блеск готового пола -->
+                                        <rect x="85" y="243" width="230" height="32" fill="url(#floor-shine)" 
+                                              opacity="0" class="floor-shine-effect" style="animation-delay: 1.5s"/>
+                                        <defs>
+                                            <linearGradient id="floor-shine" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" style="stop-color:#fff;stop-opacity:0" />
+                                                <stop offset="50%" style="stop-color:#fff;stop-opacity:0.6" />
+                                                <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
+                                            </linearGradient>
+                                        </defs>
+                                    </g>
+                                    
+                                    <!-- Анимации для покраски -->
+                                    <g id="painting-animation" class="service-visual" style="display: none;">
+                                        <!-- Банка с краской -->
+                                        <g class="paint-bucket-appear" opacity="0">
+                                            <rect x="60" y="260" width="30" height="25" fill="#E0E0E0" 
+                                                  stroke="#667eea" stroke-width="2" rx="3"/>
+                                            <rect x="60" y="265" width="30" height="20" fill="#98D8C8" opacity="0.9"/>
+                                            <ellipse cx="75" cy="260" rx="15" ry="3" fill="#C0C0C0" 
+                                                    stroke="#667eea" stroke-width="1"/>
+                                            <rect x="70" y="253" width="10" height="7" fill="#A0A0A0" rx="2"/>
+                                        </g>
+                                        
+                                        <!-- Малярный валик -->
+                                        <g class="paint-roller">
+                                            <!-- Ручка валика -->
+                                            <rect x="145" y="180" width="4" height="50" fill="#667eea" rx="2"/>
+                                            <rect x="142" y="176" width="10" height="8" fill="#4a5568" rx="2"/>
+                                            <!-- Валик -->
+                                            <rect x="135" y="160" width="25" height="18" fill="#98D8C8" 
+                                                  stroke="#667eea" stroke-width="2" rx="9"/>
+                                            <!-- Текстура валика -->
+                                            <line x1="138" y1="162" x2="138" y2="176" stroke="#667eea" 
+                                                  stroke-width="1" opacity="0.3"/>
+                                            <line x1="143" y1="162" x2="143" y2="176" stroke="#667eea" 
+                                                  stroke-width="1" opacity="0.3"/>
+                                            <line x1="148" y1="162" x2="148" y2="176" stroke="#667eea" 
+                                                  stroke-width="1" opacity="0.3"/>
+                                            <line x1="153" y1="162" x2="153" y2="176" stroke="#667eea" 
+                                                  stroke-width="1" opacity="0.3"/>
+                                            <line x1="158" y1="162" x2="158" y2="176" stroke="#667eea" 
+                                                  stroke-width="1" opacity="0.3"/>
+                                        </g>
+                                        
+                                        <!-- Краска на стене (следы валика) -->
+                                        <rect x="85" y="160" width="230" height="70" fill="#98D8C8" 
+                                              opacity="0" class="paint-layer-1" rx="4"/>
+                                        
+                                        <!-- Второй слой краски (более насыщенный) -->
+                                        <rect x="85" y="160" width="230" height="70" fill="#7BC4B8" 
+                                              opacity="0" class="paint-layer-2" rx="4"/>
+                                        
+                                        <!-- Капли краски -->
+                                        <ellipse cx="110" cy="228" rx="2" ry="4" fill="#98D8C8" 
+                                                opacity="0" class="paint-drip" style="animation-delay: 0.5s"/>
+                                        <ellipse cx="200" cy="228" rx="2" ry="4" fill="#98D8C8" 
+                                                opacity="0" class="paint-drip" style="animation-delay: 0.8s"/>
+                                        <ellipse cx="280" cy="228" rx="2" ry="4" fill="#98D8C8" 
+                                                opacity="0" class="paint-drip" style="animation-delay: 1.1s"/>
+                                    </g>
+                                    
+                                    <!-- Анимации для отделки стен -->
+                                    <g id="walls-animation" class="service-visual" style="display: none;">
+                                        <!-- Шпатель (упрощенный) -->
+                                        <g class="trowel-slide">
+                                            <rect x="150" y="180" width="30" height="8" fill="#C0C0C0" rx="2"/>
+                                            <rect x="165" y="188" width="5" height="15" fill="#667eea" rx="1"/>
+                                        </g>
+                                        
+                                        <!-- Текстура стены (большие участки) -->
+                                        <rect x="85" y="160" width="75" height="70" fill="#F5F5DC" 
+                                              opacity="0" class="texture-reveal" rx="4"/>
+                                        <rect x="170" y="160" width="75" height="70" fill="#F5F5DC" 
+                                              opacity="0" class="texture-reveal" style="animation-delay: 0.3s" rx="4"/>
+                                        <rect x="255" y="160" width="60" height="70" fill="#F5F5DC" 
+                                              opacity="0" class="texture-reveal" style="animation-delay: 0.6s" rx="4"/>
+                                    </g>
+                                    
+                                    <!-- Анимации для окон и дверей -->
+                                    <g id="windows-animation" class="service-visual" style="display: none;">
+                                        <!-- Новые окна с подсветкой -->
+                                        <rect x="100" y="175" width="55" height="55" fill="url(#window-gradient)" 
+                                              stroke="#FFD700" stroke-width="4" rx="6" opacity="0" 
+                                              class="window-highlight" filter="url(#glow)"/>
+                                        <rect x="245" y="175" width="55" height="55" fill="url(#window-gradient)" 
+                                              stroke="#FFD700" stroke-width="4" rx="6" opacity="0" 
+                                              class="window-highlight" style="animation-delay: 0.3s" 
+                                              filter="url(#glow)"/>
+                                        
+                                        <!-- Новая дверь с подсветкой -->
+                                        <rect x="175" y="215" width="50" height="65" fill="url(#door-gradient)" 
+                                              stroke="#FFD700" stroke-width="4" rx="8" opacity="0" 
+                                              class="window-highlight" style="animation-delay: 0.6s" 
+                                              filter="url(#glow)"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            </div>
+                            <div class="info-panel">
+                                <div class="current-info" id="current-service-info">
+                                    <p>Выберите услугу, чтобы увидеть визуализацию работ</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       <div class="estimate-panel">
+                            <h4>Ваша смета</h4>
+                            <div class="estimate-content">
+                                <div class="estimate-row">
+                                    <span>Выбрано услуг:</span>
+                                    <strong id="selectedCount">0</strong>
+                                </div>
+                                <div class="estimate-row">
+                                    <span>Общая стоимость:</span>
+                                    <strong id="totalPrice">0 ₽</strong>
+                                </div>
+                                <div class="estimate-row">
+                                    <span>Срок выполнения:</span>
+                                    <strong id="totalDays">0 дней</strong>
+                                </div>
+                                
+                                <div class="selected-services-list" id="selected-services-list">
+                                    <!-- Список выбранных услуг -->
+                                </div>
+                                
+                                <button class="btn" id="request-btn" style="width: 100%; margin-top: 1.5rem;" disabled>
+                                    Оставить заявку
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/services-script.js"></script>
+</body>
+</html>
